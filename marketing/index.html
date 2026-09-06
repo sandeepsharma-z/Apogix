@@ -1,0 +1,616 @@
+<!--
+  Apogix marketing homepage — standalone, self-contained.
+  Portable into apps/web (Next.js) later as the marketing route.
+  Design: alternating light / dark editorial bands. Single committed visual world.
+-->
+<title>Apogix</title>
+<meta name="description" content="Apogix publishes one post to every social channel you pick, on the date and time you set." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,440;9..144,520&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+
+<style>
+  :root {
+    /* committed palette — every color explicit, page holds on any host ground */
+    --paper:        #F4F3EF;
+    --paper-raise:  #EBE9E1;
+    --ink:          #0C0D10;
+    --ink-raise:    #16171B;
+
+    --on-light:     #16171A;
+    --on-light-dim: #5B5E65;
+    --on-dark:      #E9E7DF;
+    --on-dark-dim:  #9B9D99;
+
+    --line-light:   #DEDCD3;
+    --line-dark:    rgba(255,255,255,.14);
+
+    --accent:       #2547E6;
+    --accent-press: #1a35bd;
+    --accent-lift:  #7488EE;
+    --ok:           #1F8A54;
+
+    --maxw: 1180px;
+    --pad: clamp(1.25rem, 5vw, 3rem);
+    --band-y: clamp(4.5rem, 11vw, 9rem);
+
+    --f-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --f-sans: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--on-light);
+    font-family: var(--f-sans);
+    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.09rem);
+    line-height: 1.62;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--f-display);
+    font-optical-sizing: auto;
+    font-weight: 440;
+    line-height: 1.06;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+    margin: 0;
+  }
+  h1 { font-size: clamp(2.75rem, 1.8rem + 4.6vw, 5rem); font-weight: 380; }
+  h2 { font-size: clamp(2rem, 1.35rem + 2.7vw, 3.3rem); }
+  h3 { font-size: clamp(1.35rem, 1.15rem + 0.9vw, 1.65rem); font-weight: 520; letter-spacing: -0.005em; }
+
+  p { margin: 0; }
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad); }
+
+  /* ---------- bands: the alternating rhythm ---------- */
+  .band { padding-block: var(--band-y); position: relative; }
+  .band--light {
+    background: var(--paper); color: var(--on-light);
+    --local-line: var(--line-light);
+    --local-dim: var(--on-light-dim);
+    --local-surface: var(--paper-raise);
+    --local-accent: var(--accent);
+  }
+  .band--dark {
+    background: var(--ink); color: var(--on-dark);
+    --local-line: var(--line-dark);
+    --local-dim: var(--on-dark-dim);
+    --local-surface: var(--ink-raise);
+    --local-accent: var(--accent-lift);
+  }
+
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--local-accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.4rem;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 7px; height: 7px;
+    background: currentColor;
+    border-radius: 50%;
+    flex: none;
+  }
+
+  .lede { font-size: clamp(1.08rem, 1rem + 0.4vw, 1.3rem); color: var(--local-dim); max-width: 46ch; }
+  .band--dark .lede, .band--light .lede { line-height: 1.6; }
+
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(2.25rem, 6vw, 5.5rem);
+    align-items: center;
+  }
+  .stack > * + * { margin-top: 1.5rem; }
+
+  /* ---------- header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line-light);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .logo { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--f-display); font-size: 1.3rem; font-weight: 520; letter-spacing: -0.01em; }
+  .logo .orb {
+    width: 13px; height: 13px; border-radius: 50%;
+    border: 2px solid var(--accent);
+    position: relative; flex: none;
+  }
+  .logo .orb::after {
+    content: ""; position: absolute; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent); top: -3px; right: -3px;
+  }
+  .nav-links { display: flex; gap: 2rem; font-size: 0.92rem; color: var(--on-light-dim); }
+  .nav-links a:hover { color: var(--on-light); }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--f-sans); font-size: 0.95rem; font-weight: 600;
+    padding: 0.72rem 1.25rem; border-radius: 11px;
+    border: 1px solid transparent; cursor: pointer;
+    transition: transform .16s ease, background-color .16s ease, border-color .16s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn--primary { background: var(--accent); color: #fff; }
+  .btn--primary:hover { background: var(--accent-press); }
+  .btn--ghost { border-color: var(--local-line, var(--line-light)); color: inherit; }
+  .btn--ghost:hover { border-color: currentColor; }
+  .btn--lg { padding: 0.9rem 1.5rem; font-size: 1rem; border-radius: 12px; }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: 0.9rem; align-items: center; }
+  .fineprint { font-size: 0.85rem; color: var(--local-dim); margin-top: 1.6rem; }
+
+  /* ---------- hero scheduling visual ---------- */
+  .panel {
+    background: var(--local-surface);
+    border: 1px solid var(--local-line);
+    border-radius: 20px;
+    padding: clamp(1.25rem, 3vw, 1.9rem);
+  }
+  .panel-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    font-family: var(--f-mono); font-size: 0.8rem; letter-spacing: 0.03em;
+    color: var(--local-dim);
+    margin-bottom: 1.1rem;
+  }
+
+  .cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal span {
+    font-family: var(--f-mono); font-size: 0.82rem;
+    aspect-ratio: 1; display: grid; place-items: center;
+    border-radius: 9px; color: var(--local-dim);
+    font-variant-numeric: tabular-nums;
+  }
+  .cal .dow { color: var(--local-dim); opacity: 0.55; font-size: 0.68rem; }
+  .cal .day { color: inherit; }
+  .cal .muted { opacity: 0.3; }
+  .cal .pick {
+    background: var(--accent); color: #fff; font-weight: 500;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+
+  .rule { height: 1px; background: var(--local-line); margin: 1.35rem 0; border: 0; }
+
+  .sched-label { font-family: var(--f-mono); font-size: 0.8rem; color: var(--local-accent); margin-bottom: 0.9rem; letter-spacing: 0.02em; }
+
+  .chan { display: flex; align-items: center; gap: 0.85rem; padding: 0.6rem 0; }
+  .chan + .chan { border-top: 1px solid var(--local-line); }
+  .glyph {
+    width: 30px; height: 30px; flex: none;
+    border: 1px solid var(--local-line); border-radius: 9px;
+    display: grid; place-items: center;
+    font-family: var(--f-mono); font-size: 0.72rem; font-weight: 500;
+  }
+  .chan .name { flex: 1; font-weight: 500; font-size: 0.95rem; }
+  .chan .time { font-family: var(--f-mono); font-size: 0.82rem; color: var(--local-dim); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .dot--queued { background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent); }
+
+  /* ---------- generic content blocks ---------- */
+  .col2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3rem); }
+  .measure { max-width: 34ch; }
+
+  .steps { display: grid; gap: 1px; background: var(--local-line); border: 1px solid var(--local-line); border-radius: 16px; overflow: hidden; }
+  .step { background: var(--band-bg, var(--paper)); padding: clamp(1.4rem, 3vw, 2.1rem); display: grid; grid-template-columns: auto 1fr; gap: 1.4rem; align-items: start; }
+  .band--light .step { background: var(--paper); }
+  .band--dark .step { background: var(--ink); }
+  .step .idx { font-family: var(--f-mono); font-size: 0.85rem; color: var(--local-accent); padding-top: 0.3rem; }
+  .step h3 { margin-bottom: 0.5rem; }
+  .step p { color: var(--local-dim); }
+
+  .feature-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
+  .feature-list li { display: grid; grid-template-columns: auto 1fr; gap: 0.85rem; align-items: start; color: var(--local-dim); }
+  .feature-list li::before { content: "✦"; color: var(--local-accent); font-size: 0.85rem; line-height: 1.7; }
+  .feature-list b { color: inherit; font-weight: 600; }
+
+  /* override model visual */
+  .over { display: grid; gap: 1rem; }
+  .over .master { border-left: 2px solid var(--local-accent); padding-left: 1rem; }
+  .over .master .tag, .over .variant .tag { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--local-dim); display: block; margin-bottom: 0.4rem; }
+  .over .variant { border: 1px solid var(--local-line); border-radius: 12px; padding: 0.85rem 1rem; display: grid; grid-template-columns: auto 1fr; gap: 0.8rem; align-items: baseline; }
+  .over .variant .glyph { width: 24px; height: 24px; font-size: 0.62rem; }
+  .over .variant p { font-size: 0.92rem; }
+  .over .variant .meta { font-family: var(--f-mono); font-size: 0.74rem; color: var(--local-dim); margin-top: 0.35rem; }
+
+  /* pricing — vertical chapters, no bright boxed card */
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--local-line); }
+  .plan { padding: 2.25rem clamp(1rem, 2.5vw, 1.9rem) 2rem; border-right: 1px solid var(--local-line); display: flex; flex-direction: column; }
+  .plan:last-child { border-right: 0; }
+  .plan.featured { background: var(--local-surface); box-shadow: inset 0 2px 0 var(--local-accent); }
+  .plan .pname { font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--local-dim); }
+  .plan.featured .pname { color: var(--local-accent); }
+  .plan .price { font-family: var(--f-display); font-size: clamp(2rem, 1.4rem + 2vw, 2.9rem); font-weight: 380; margin: 0.6rem 0 0.15rem; }
+  .plan .price small { font-family: var(--f-mono); font-size: 0.8rem; color: var(--local-dim); font-weight: 400; }
+  .plan ul { list-style: none; margin: 1.3rem 0 1.8rem; padding: 0; display: grid; gap: 0.6rem; font-size: 0.92rem; color: var(--local-dim); }
+  .plan ul li { padding-left: 1.1rem; position: relative; }
+  .plan ul li::before { content: "–"; position: absolute; left: 0; color: var(--local-accent); }
+  .plan .btn { margin-top: auto; justify-content: center; }
+  .plan-note { font-size: 0.85rem; color: var(--local-dim); margin-top: 1.5rem; font-family: var(--f-mono); }
+
+  /* faq — numbered disclosure */
+  .faq { border-top: 1px solid var(--local-line); }
+  .faq details { border-bottom: 1px solid var(--local-line); }
+  .faq summary { display: grid; grid-template-columns: auto 1fr auto; gap: 1.25rem; align-items: baseline; padding: 1.5rem 0; cursor: pointer; list-style: none; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary .q { font-family: var(--f-display); font-size: clamp(1.1rem, 1rem + 0.5vw, 1.4rem); font-weight: 440; }
+  .faq summary .n { font-family: var(--f-mono); font-size: 0.85rem; color: var(--local-accent); }
+  .faq summary .pm { font-family: var(--f-mono); color: var(--local-dim); transition: transform .2s ease; }
+  .faq details[open] summary .pm { transform: rotate(45deg); }
+  .faq .a { padding: 0 0 1.6rem calc(0.85rem + 1.25rem); color: var(--local-dim); max-width: 62ch; }
+
+  /* footer */
+  .foot { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2rem; }
+  .foot .brand-line { color: var(--on-dark-dim); max-width: 30ch; margin-top: 1rem; font-size: 0.92rem; }
+  .foot h4 { font-family: var(--f-mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--on-dark-dim); margin: 0 0 1rem; font-weight: 500; }
+  .foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; font-size: 0.92rem; color: var(--on-dark-dim); }
+  .foot ul a:hover { color: var(--on-dark); }
+  .foot-base { border-top: 1px solid var(--line-dark); margin-top: 3rem; padding-top: 1.5rem; font-family: var(--f-mono); font-size: 0.78rem; color: var(--on-dark-dim); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  /* responsive */
+  @media (max-width: 900px) {
+    .split { grid-template-columns: 1fr; gap: 2.5rem; }
+    .split .visual-col { order: 2; }
+    .col2 { grid-template-columns: 1fr; }
+    .plans { grid-template-columns: 1fr; }
+    .plan { border-right: 0; border-bottom: 1px solid var(--local-line); }
+    .plan:last-child { border-bottom: 0; }
+    .foot { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 520px) {
+    .step { grid-template-columns: 1fr; gap: 0.6rem; }
+    .foot { grid-template-columns: 1fr; }
+  }
+</style>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top"><span class="orb" aria-hidden="true"></span>Apogix</a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#scheduling">Scheduling</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn--primary" href="#pricing">Start free</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 1 · HERO (light) -->
+  <section class="band band--light">
+    <div class="wrap split">
+      <div class="stack">
+        <span class="eyebrow">Social publishing, scheduled</span>
+        <h1>Pick a date. Apogix posts it everywhere you chose.</h1>
+        <p class="lede">Write one post, adapt it for each channel, and drop it on a date and time. When that moment arrives, Apogix publishes to every platform you selected — Instagram, Facebook and LinkedIn — whether your laptop is open or not.</p>
+        <div class="cta-row">
+          <a class="btn btn--primary btn--lg" href="#pricing">Start free</a>
+          <a class="btn btn--ghost btn--lg" href="#how">See how it works</a>
+        </div>
+        <p class="fineprint">For creators, local businesses and agencies. Billed in ₹ through Razorpay.</p>
+      </div>
+
+      <div class="visual-col reveal">
+        <div class="panel" role="img" aria-label="A calendar with August 20 selected, and a post queued to Instagram, Facebook and LinkedIn at 9:30 AM.">
+          <div class="panel-head"><span>August 2026</span><span>workspace · Asia/Kolkata</span></div>
+          <div class="cal">
+            <span class="dow">S</span><span class="dow">M</span><span class="dow">T</span><span class="dow">W</span><span class="dow">T</span><span class="dow">F</span><span class="dow">S</span>
+            <span class="muted">27</span><span class="muted">28</span><span class="muted">29</span><span class="muted">30</span><span class="muted">31</span><span class="day">1</span><span class="day">2</span>
+            <span class="day">3</span><span class="day">4</span><span class="day">5</span><span class="day">6</span><span class="day">7</span><span class="day">8</span><span class="day">9</span>
+            <span class="day">10</span><span class="day">11</span><span class="day">12</span><span class="day">13</span><span class="day">14</span><span class="day">15</span><span class="day">16</span>
+            <span class="day">17</span><span class="day">18</span><span class="day">19</span><span class="day pick">20</span><span class="day">21</span><span class="day">22</span><span class="day">23</span>
+            <span class="day">24</span><span class="day">25</span><span class="day">26</span><span class="day">27</span><span class="day">28</span><span class="day">29</span><span class="day">30</span>
+            <span class="day">31</span>
+          </div>
+          <hr class="rule" />
+          <p class="sched-label">SCHEDULED · THU 20 AUG · 9:30 AM</p>
+          <div class="chan"><span class="glyph">IG</span><span class="name">Instagram</span><span class="time">9:30 AM</span><span class="dot dot--queued" aria-hidden="true"></span></div>
+          <div class="chan"><span class="glyph">FB</span><span class="name">Facebook Page</span><span class="time">9:30 AM</span><span class="dot dot--queued" aria-hidden="true"></span></div>
+          <div class="chan"><span class="glyph">LI</span><span class="name">LinkedIn</span><span class="time">9:30 AM</span><span class="dot dot--queued" aria-hidden="true"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · BEFORE / AFTER (dark) -->
+  <section class="band band--dark">
+    <div class="wrap stack">
+      <span class="eyebrow">The difference</span>
+      <h2>One flow instead of the same chore, five times over.</h2>
+      <div class="col2" style="margin-top:2.5rem">
+        <div class="stack reveal">
+          <h3>Doing it by hand</h3>
+          <p class="measure" style="color:var(--local-dim)">Open each app. Resize each image to fit. Paste the caption, tweak the hashtags, hit post. Switch account. Repeat. Notice at 6pm that LinkedIn never went out.</p>
+        </div>
+        <div class="stack reveal">
+          <h3>Doing it with Apogix</h3>
+          <p class="measure" style="color:var(--local-dim)">Compose once. Choose the channels. Set the date and time. Apogix takes it from there and tells you, per channel, exactly what published and when.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · HOW IT WORKS (light) -->
+  <section class="band band--light" id="how">
+    <div class="wrap stack">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps, in order, every time.</h2>
+      <div class="steps reveal" style="margin-top:2.5rem">
+        <div class="step">
+          <span class="idx">01</span>
+          <div><h3>Create once</h3><p>Write your master caption and add your media. This is the single source your post is built from.</p></div>
+        </div>
+        <div class="step">
+          <span class="idx">02</span>
+          <div><h3>Adapt per channel</h3><p>Pick the platforms. Each one gets an optional override — a shorter line for LinkedIn, a first comment for Instagram — with a live preview as you go.</p></div>
+        </div>
+        <div class="step">
+          <span class="idx">03</span>
+          <div><h3>Schedule to a date</h3><p>Choose the day and the time. Send it straight to the queue, or route it to an approver first if your team works that way.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · SCHEDULING (dark) — the core feature -->
+  <section class="band band--dark" id="scheduling">
+    <div class="wrap split">
+      <div class="visual-col reveal">
+        <div class="panel">
+          <div class="panel-head"><span>Post · draft</span><span>3 channels selected</span></div>
+          <p style="font-size:1.02rem;line-height:1.55">Monsoon menu is live 🌧️ — two new filter coffees and a cardamom bun. All week at the Indiranagar counter.</p>
+          <hr class="rule" />
+          <p class="sched-label">PUBLISH ON</p>
+          <div class="chan"><span class="glyph">📅</span><span class="name">Thu, 20 Aug 2026</span><span class="time">9:30 AM IST</span></div>
+          <div class="chan"><span class="glyph">IG</span><span class="name">Instagram</span><span class="time">queued</span><span class="dot dot--queued" aria-hidden="true"></span></div>
+          <div class="chan"><span class="glyph">FB</span><span class="name">Facebook Page</span><span class="time">queued</span><span class="dot dot--queued" aria-hidden="true"></span></div>
+          <div class="chan"><span class="glyph">LI</span><span class="name">LinkedIn</span><span class="time">queued</span><span class="dot dot--queued" aria-hidden="true"></span></div>
+        </div>
+      </div>
+      <div class="stack">
+        <span class="eyebrow">Scheduling that holds</span>
+        <h2>Set the date. Close the laptop. It still goes out.</h2>
+        <p class="lede">Tap any date on the calendar, set the time, and choose the channels for that post. Apogix queues one job per channel, so a hiccup on one platform never blocks the others.</p>
+        <ul class="feature-list">
+          <li><span><b>Any date and time</b> — schedule days or months ahead, down to the minute.</span></li>
+          <li><span><b>Per-post channel choice</b> — different posts, different platforms, no lock-in.</span></li>
+          <li><span><b>Drag to reschedule</b> — move a post on the calendar; the timezone is always shown.</span></li>
+          <li><span><b>Runs on our servers</b> — publishing never depends on a browser tab staying open.</span></li>
+          <li><span><b>Retries without duplicates</b> — a transient failure is retried; it never double-posts.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · OVERRIDE MODEL (light) -->
+  <section class="band band--light">
+    <div class="wrap split">
+      <div class="stack">
+        <span class="eyebrow">One post, many shapes</span>
+        <h2>The same idea, tuned for each channel.</h2>
+        <p class="lede">Your master caption stays the source of truth. Any channel that needs something different gets its own version — and Apogix checks each one against that platform's real limits before it's queued.</p>
+        <ul class="feature-list">
+          <li><span><b>Character and media checks</b> per platform, up front.</span></li>
+          <li><span><b>First comment</b> support where the platform allows it.</span></li>
+          <li><span><b>Non-destructive crops</b> — your original file is always kept.</span></li>
+          <li><span>Previews are indicative — we're honest that native rendering can vary.</span></li>
+        </ul>
+      </div>
+      <div class="visual-col reveal">
+        <div class="over">
+          <div class="master">
+            <span class="tag">Master caption</span>
+            <p>Monsoon menu is live 🌧️ Two new filter coffees and a cardamom bun — all week at our Indiranagar counter. Come get wet and caffeinated. #Bengaluru #FilterCoffee</p>
+          </div>
+          <div class="variant">
+            <span class="glyph">IG</span>
+            <div><p>Monsoon menu is live 🌧️☕ Swipe for the cardamom bun.</p><p class="meta">first comment · #Bengaluru #FilterCoffee #Indiranagar</p></div>
+          </div>
+          <div class="variant">
+            <span class="glyph">LI</span>
+            <div><p>Our monsoon menu is now available at the Indiranagar counter — two single-origin filter coffees and a house-baked cardamom bun, all week.</p><p class="meta">no hashtags · link in post</p></div>
+          </div>
+          <div class="variant">
+            <span class="glyph">FB</span>
+            <div><p>Monsoon menu is live 🌧️ Two new filter coffees and a cardamom bun — all week at our Indiranagar counter.</p><p class="meta">image · 1200×1200</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · RELIABILITY (dark) -->
+  <section class="band band--dark">
+    <div class="wrap stack">
+      <span class="eyebrow">Built to not miss</span>
+      <h2>When something breaks, you get an action — not a mystery.</h2>
+      <div class="col2" style="margin-top:2.5rem">
+        <ul class="feature-list reveal">
+          <li><span><b>One job per destination</b> — Instagram failing doesn't hold up LinkedIn.</span></li>
+          <li><span><b>Idempotent retries</b> — transient errors retry with backoff; permission errors don't.</span></li>
+          <li><span><b>Honest partial success</b> — never a green checkmark when only two of three went out.</span></li>
+        </ul>
+        <ul class="feature-list reveal">
+          <li><span><b>Reconnect alerts</b> — we warn you before an expiring token affects a scheduled post.</span></li>
+          <li><span><b>Plain-language errors</b> — each one names the platform and the next step.</span></li>
+          <li><span><b>Provider outages handled</b> — we pause and back off instead of failing you instantly.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · WORKSPACES (light) -->
+  <section class="band band--light">
+    <div class="wrap split">
+      <div class="visual-col reveal">
+        <div class="panel">
+          <div class="panel-head"><span>Workspace · Filter &amp; Co.</span><span>4 members</span></div>
+          <div class="chan"><span class="glyph">O</span><span class="name">Priya — Owner</span><span class="time">billing · publish</span></div>
+          <div class="chan"><span class="glyph">E</span><span class="name">Arjun — Editor</span><span class="time">create · submit</span></div>
+          <div class="chan"><span class="glyph">A</span><span class="name">Meera — Approver</span><span class="time">review · approve</span></div>
+          <div class="chan"><span class="glyph">V</span><span class="name">Sam — Viewer</span><span class="time">read-only</span></div>
+          <hr class="rule" />
+          <p class="sched-label">2 more client workspaces · fully separated</p>
+        </div>
+      </div>
+      <div class="stack">
+        <span class="eyebrow">For teams and agencies</span>
+        <h2>A separate, sealed workspace for every client.</h2>
+        <p class="lede">Each client's accounts, posts and media live in their own workspace. Roles decide who can draft, who can approve and who can publish — and every approval and change is written to an audit log.</p>
+        <ul class="feature-list">
+          <li><span><b>Five roles</b> — Owner, Admin, Editor, Approver, Viewer.</span></li>
+          <li><span><b>Approvals</b> — editors submit, approvers sign off on the exact version.</span></li>
+          <li><span><b>Strict isolation</b> — no data crosses between workspaces, enforced at the database.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · PRICING (dark) -->
+  <section class="band band--dark" id="pricing">
+    <div class="wrap stack">
+      <span class="eyebrow">Pricing</span>
+      <h2>Plans that grow from one channel to a client roster.</h2>
+      <div class="plans reveal" style="margin-top:2.5rem">
+        <div class="plan">
+          <span class="pname">Starter</span>
+          <div class="price">₹499 <small>/ month</small></div>
+          <ul>
+            <li>3 social accounts</li>
+            <li>1 member</li>
+            <li>30 destinations / month</li>
+            <li>2 GB media</li>
+          </ul>
+          <a class="btn btn--ghost" href="#">Start free</a>
+        </div>
+        <div class="plan featured">
+          <span class="pname">Professional · most chosen</span>
+          <div class="price">₹999 <small>/ month</small></div>
+          <ul>
+            <li>8 social accounts</li>
+            <li>3 members</li>
+            <li>150 destinations / month</li>
+            <li>Approvals workflow</li>
+            <li>10 GB media</li>
+          </ul>
+          <a class="btn btn--primary" href="#">Start free</a>
+        </div>
+        <div class="plan">
+          <span class="pname">Agency</span>
+          <div class="price">₹2,499 <small>/ month</small></div>
+          <ul>
+            <li>25 social accounts</li>
+            <li>10 members</li>
+            <li>500 destinations / month</li>
+            <li>Client workspaces</li>
+            <li>50 GB media</li>
+          </ul>
+          <a class="btn btn--ghost" href="#">Talk to us</a>
+        </div>
+      </div>
+      <p class="plan-note">We count destinations, not posts. One post sent to three channels uses three.</p>
+    </div>
+  </section>
+
+  <!-- 9 · FAQ (light) -->
+  <section class="band band--light" id="faq">
+    <div class="wrap stack">
+      <span class="eyebrow">Questions</span>
+      <h2>The things people ask first.</h2>
+      <div class="faq reveal" style="margin-top:2rem">
+        <details open>
+          <summary><span class="n">01</span><span class="q">Which platforms are supported?</span><span class="pm">+</span></summary>
+          <p class="a">Instagram Professional, Facebook Pages and LinkedIn at launch. TikTok, YouTube, Pinterest and X are on the roadmap.</p>
+        </details>
+        <details>
+          <summary><span class="n">02</span><span class="q">Do I have to give Apogix my passwords?</span><span class="pm">+</span></summary>
+          <p class="a">No. You connect through each platform's official login screen. Apogix never sees or stores your social password, and your access tokens never touch the browser.</p>
+        </details>
+        <details>
+          <summary><span class="n">03</span><span class="q">What happens if a post fails?</span><span class="pm">+</span></summary>
+          <p class="a">We retry the failures that can be retried, leave the ones that can't alone, and send you a plain-language notification with the platform name and what to do next.</p>
+        </details>
+        <details>
+          <summary><span class="n">04</span><span class="q">Does scheduling work if my computer is off?</span><span class="pm">+</span></summary>
+          <p class="a">Yes. Publishing runs on Apogix servers on a queue, not in your browser. Schedule a post and close everything — it still goes out at the time you set.</p>
+        </details>
+        <details>
+          <summary><span class="n">05</span><span class="q">Can my team approve posts before they publish?</span><span class="pm">+</span></summary>
+          <p class="a">On Professional and Agency plans. Editors submit a version, approvers accept or request changes, and every transition is recorded in the audit log.</p>
+        </details>
+        <details>
+          <summary><span class="n">06</span><span class="q">How am I billed?</span><span class="pm">+</span></summary>
+          <p class="a">Monthly in Indian rupees through Razorpay. Cancel anytime — your access runs to the end of the billing period, and your invoices stay visible afterward.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · CTA + FOOTER (dark) -->
+  <section class="band band--dark">
+    <div class="wrap" style="text-align:center;display:grid;gap:1.6rem;justify-items:center">
+      <h2 style="max-width:18ch">Your next week of posts, scheduled in one sitting.</h2>
+      <p class="lede" style="max-width:44ch;margin-inline:auto">Connect a channel, compose a post, put it on a date. Apogix does the rest.</p>
+      <a class="btn btn--primary btn--lg" href="#pricing">Start free</a>
+    </div>
+  </section>
+
+  <footer class="band band--dark" style="padding-top:0">
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <span class="logo"><span class="orb" aria-hidden="true"></span>Apogix</span>
+          <p class="brand-line">Create once. Adapt intentionally. Publish everywhere from one calm workspace.</p>
+        </div>
+        <div><h4>Product</h4><ul><li><a href="#how">How it works</a></li><li><a href="#scheduling">Scheduling</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Contact</a></li><li><a href="#">Status</a></li></ul></div>
+        <div><h4>Legal</h4><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Data deletion</a></li></ul></div>
+      </div>
+      <div class="foot-base">
+        <span>© 2026 Apogix</span>
+        <span>Made for Indian businesses · Billed via Razorpay</span>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  (function () {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.16 });
+    document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+  })();
+</script>

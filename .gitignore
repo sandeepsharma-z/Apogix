@@ -1,0 +1,22 @@
+node_modules/
+.next/
+dist/
+build/
+out/
+coverage/
+.turbo/
+*.log
+
+# env
+.env
+.env.local
+.env.*.local
+
+# editor / os
+.DS_Store
+.vscode/
+.idea/
+
+# misc
+*.tsbuildinfo
+.pnpm-store/
