@@ -618,6 +618,31 @@ a {
   color: transparent;
 }
 
+.hero-typing {
+  position: relative;
+  width: max-content;
+  min-width: 16ch;
+  min-height: 1.08em;
+  white-space: nowrap;
+}
+
+.hero-typing i {
+  display: inline-block;
+  width: 3px;
+  height: .82em;
+  margin-left: .08em;
+  border-radius: 2px;
+  background: var(--accent);
+  vertical-align: -.04em;
+  animation: heroCaretBlink .8s steps(1,end) infinite;
+}
+
+@keyframes heroCaretBlink { 50% { opacity:0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-typing i { display: none; }
+}
+
 .hero .sub {
   max-width: 42ch;
   margin-top: 1.65rem;

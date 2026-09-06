@@ -1,4 +1,5 @@
 import { FloatingActions } from "@/components/floating-actions";
+import { HeroTyping } from "@/components/hero-typing";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { CalendarShowcase } from "@/components/calendar-showcase";
 import { Check, ArrowRight, LinkIcon, Pencil, CalendarIcon } from "@/components/icons";
@@ -68,7 +69,7 @@ function Hero() {
       <div className="hero-grid" aria-hidden="true" />
       <div className="container hero-layout">
         <div className="hero-copy">
-          <h1>Create once. <span className="grad">Publish everywhere.</span></h1>
+          <h1>Create once. <HeroTyping /></h1>
           <p className="sub">
             Plan your content, customize every post for each platform, and schedule it across all your social channels from one organized workspace.
           </p>
