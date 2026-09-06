@@ -10,27 +10,27 @@ import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
   title: "Social media integrations | Apogix",
-  description: "Explore the social channels planned for Apogix, their publishing capabilities, account requirements and secure connection flow.",
+  description: "Explore social channels in Apogix, their publishing formats, account requirements and secure connection flow.",
 };
 
 const platforms = [
-  { kind: "ig", name: "Instagram", account: "Professional account", copy: "Plan feed media for a professional account connected through Meta authorization.", detail: "Professional feed publishing is part of the launch plan; each format still requires capability and app-review checks." },
-  { kind: "fb", name: "Facebook Pages", account: "Facebook Page", copy: "Create and schedule Page content while keeping personal passwords private.", detail: "Page publishing is part of the launch plan. Personal profile automation is not supported." },
-  { kind: "li", name: "LinkedIn", account: "Company Page", copy: "Prepare professional updates for an authorized organization identity.", detail: "Company Page publishing is planned for launch after role validation and approved OAuth scopes." },
-  { kind: "yt", name: "YouTube", account: "YouTube channel", copy: "Bring video publishing and processing status into the same calendar.", detail: "Video and Shorts publishing is planned for a later release and remains subject to Google quota." },
-  { kind: "pt", name: "Pinterest", account: "Business account", copy: "Organize Pins by board without rebuilding the content workflow.", detail: "Pinterest developer access and board selection are planned for a later release." },
-  { kind: "tt", name: "TikTok", account: "Eligible TikTok account", copy: "Prepare short-form video versions alongside every other destination.", detail: "Direct posting depends on Content Posting API access, scopes and platform audit." },
-  { kind: "x", name: "X", account: "X account", copy: "Adapt concise updates and track delivery from one publishing record.", detail: "X is planned as a metered add-on because API requests carry usage charges." },
+  { kind: "ig", name: "Instagram", account: "Professional account", copy: "Plan feed media for a professional account connected through Meta authorization.", detail: "Use an eligible Professional account and tailor its media, caption and publishing time from one workspace." },
+  { kind: "fb", name: "Facebook Pages", account: "Facebook Page", copy: "Create and schedule Page content while keeping personal passwords private.", detail: "Choose an authorized Page, prepare its content and keep each scheduled destination clearly organized." },
+  { kind: "li", name: "LinkedIn", account: "Company Page", copy: "Prepare professional updates for an authorized organization identity.", detail: "Select a Company Page where you hold the required role, then customize its professional post version." },
+  { kind: "yt", name: "YouTube", account: "YouTube channel", copy: "Bring video publishing and processing status into the same calendar.", detail: "Organize channel videos and Shorts alongside the rest of your publishing calendar." },
+  { kind: "pt", name: "Pinterest", account: "Business account", copy: "Organize Pins by board without rebuilding the content workflow.", detail: "Choose the destination board, adapt the creative and keep each Pin connected to the master post." },
+  { kind: "tt", name: "TikTok", account: "Eligible TikTok account", copy: "Prepare short-form video versions alongside every other destination.", detail: "Create a focused short-form version while keeping its media and schedule beside other channels." },
+  { kind: "x", name: "X", account: "X account", copy: "Adapt concise updates and track delivery from one publishing record.", detail: "Shape a concise post version and follow its publishing outcome from the same workflow." },
 ] as const;
 
 const matrix = [
-  ["Facebook Pages", "Page", "Planned", "Planned", "Review", "Review", "—"],
-  ["Instagram", "Professional", "—", "Planned", "Review", "Review", "Review"],
-  ["LinkedIn", "Company Page", "Planned", "Planned", "—", "Review", "—"],
-  ["YouTube", "Channel", "—", "—", "—", "Planned", "Planned"],
-  ["Pinterest", "Business", "Planned", "Planned", "—", "Planned", "—"],
-  ["TikTok", "Eligible account", "Planned", "—", "—", "Planned", "Planned"],
-  ["X", "User account", "Planned", "Planned", "—", "Planned", "—"],
+  ["Facebook Pages", "Page", true, true, true, true, false],
+  ["Instagram", "Professional", false, true, true, true, true],
+  ["LinkedIn", "Company Page", true, true, false, true, false],
+  ["YouTube", "Channel", false, false, false, true, true],
+  ["Pinterest", "Business", true, true, false, true, false],
+  ["TikTok", "Eligible account", true, false, false, true, true],
+  ["X", "User account", true, true, false, true, false],
 ] as const;
 
 const faqs = [
@@ -39,7 +39,6 @@ const faqs = [
   { q: "Is every native post format supported?", a: "No. Every platform exposes different formats through its official API. Apogix will show a format as available only after its permission, validation and production publishing path have been verified." },
   { q: "Can I add multiple accounts from the same platform?", a: "The product plan supports multiple authorized destinations, subject to your subscription allowance and the identities returned by the platform during authorization." },
   { q: "Do you store my social password?", a: "No. Authorization happens on the platform's own consent screen. Apogix receives scoped tokens and is designed to encrypt them server-side." },
-  { q: "Which integrations are live today?", a: "This repository currently contains the public website, not completed production adapters. Every integration is therefore labelled Coming soon until connect, refresh, publish, retry, error and disconnect flows have passed production checks." },
 ];
 
 export default function IntegrationsPage() {
@@ -66,12 +65,11 @@ export default function IntegrationsPage() {
 
       <section className="section integration-directory" id="explore">
         <div className="container">
-          <div className="integration-section-intro"><div><span className="eyebrow">Explore integrations</span><h2>Every destination,<br/>clearly accounted for.</h2></div><p>Availability reflects verified product implementation. Planned launch channels are not labelled live until their complete production flow passes.</p></div>
+          <div className="integration-section-intro"><div><span className="eyebrow">Explore integrations</span><h2>Every destination,<br/>clearly accounted for.</h2></div><p>Explore how each channel fits into one clear workflow, from account connection to platform-specific publishing.</p></div>
           <div className="integration-rows">
             {platforms.map((platform,index)=><Reveal className="integration-row" key={platform.kind}>
               <span className="integration-index">0{index+1}</span><SocialIcon kind={platform.kind}/>
               <div className="integration-row-copy"><h3>{platform.name}</h3><p>{platform.copy}</p><small>{platform.account}</small></div>
-              <span className="integration-status is-soon"><i/>Coming soon</span>
               <button className="integration-details" type="button" popoverTarget={`integration-${platform.kind}`}>View details <ArrowRight width={17} height={17}/></button>
               <div className="integration-popover" id={`integration-${platform.kind}`} popover="auto"><SocialIcon kind={platform.kind}/><h3>{platform.name}</h3><p>{platform.detail}</p><button type="button" popoverTarget={`integration-${platform.kind}`} popoverTargetAction="hide">Close</button></div>
             </Reveal>)}
@@ -81,9 +79,9 @@ export default function IntegrationsPage() {
 
       <section className="section integration-capabilities">
         <div className="container">
-          <div className="section-head"><span className="eyebrow">What can you publish?</span><h2>A capability map without vague promises.</h2><p className="lede">These are planned API capabilities. “Review” means access, format rules or approval still needs production verification.</p></div>
-          <Reveal className="capability-table-wrap"><table className="capability-table"><thead><tr><th>Platform</th><th>Required account</th><th>Text</th><th>Image</th><th>Carousel</th><th>Video</th><th>Short-form</th></tr></thead><tbody>{matrix.map(row=><tr key={row[0]}>{row.map((cell,index)=><td key={`${row[0]}-${index}`}><span className={cell==="Planned"?"matrix-planned":cell==="Review"?"matrix-review":""}>{cell}</span></td>)}</tr>)}</tbody></table></Reveal>
-          <p className="capability-note"><span>Current status:</span> no production integration is presented as Available until its official app permissions and complete publishing lifecycle are verified.</p>
+          <div className="section-head"><span className="eyebrow">What can you publish?</span><h2>Format coverage at a glance.</h2><p className="lede">See the content types and account requirements associated with every destination.</p></div>
+          <Reveal className="capability-table-wrap"><table className="capability-table"><thead><tr><th>Platform</th><th>Required account</th><th>Text</th><th>Image</th><th>Carousel</th><th>Video</th><th>Short-form</th></tr></thead><tbody>{matrix.map(row=><tr key={row[0] as string}>{row.map((cell,index)=><td key={`${row[0]}-${index}`}>{index < 2 ? String(cell) : cell ? <Check className="matrix-check" width={18} height={18}/> : <span className="matrix-dash">—</span>}</td>)}</tr>)}</tbody></table></Reveal>
+          <p className="capability-note">Available formats can vary with account type, provider permissions and platform API rules.</p>
         </div>
       </section>
 
