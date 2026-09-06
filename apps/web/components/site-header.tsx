@@ -5,7 +5,7 @@ import { ArrowRight } from "@/components/icons";
 const menus = [
  {title:"Product", links:[["Master composer","/#compose"],["Content calendar","/#scheduling"],["Reliability + Analytics","/#reliability"]]},
  {title:"Solutions", links:[["Creators & teams","/#audiences"],["Client approvals","/#scheduling"],["Multi-channel publishing","/integrations"]]},
- {title:"Resources", links:[["How it works","/#how-it-works"],["Questions & answers","/#faq"],["Plans & pricing","/#pricing"]]}
+ {title:"Resources", links:[["How it works","/#how-it-works"],["Questions & answers","/#faq"],["Plans & pricing","/pricing"]]}
 ];
 export function SiteHeader() {
  const [scrolled,setScrolled]=useState(false); const [open,setOpen]=useState<string|null>(null); const [mobile,setMobile]=useState(false); const root=useRef<HTMLElement>(null);
@@ -15,7 +15,7 @@ export function SiteHeader() {
  <button className="mobile-nav-toggle" aria-label={mobile?"Close navigation":"Open navigation"} aria-expanded={mobile} aria-controls="main-navigation" onClick={()=>setMobile(!mobile)}>{mobile?"✕":"☰"}</button>
  <nav id="main-navigation" aria-label="Main navigation" className={`nav-links ${mobile?"is-mobile-open":""}`}>
  {menus.slice(0,2).map(menu=><div className="nav-dropdown" key={menu.title}><button data-menu={menu.title} aria-expanded={open===menu.title} aria-controls={`nav-${menu.title}`} onClick={()=>setOpen(open===menu.title?null:menu.title)}>{menu.title}<svg className="nav-chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5"/></svg></button><div id={`nav-${menu.title}`} className="nav-dropdown-panel" hidden={open!==menu.title}>{menu.links.map(([text,href])=><a key={href} href={href} onClick={()=>{setOpen(null);setMobile(false)}}>{text}</a>)}</div></div>)}
- <a href="/integrations" onClick={()=>{setOpen(null);setMobile(false)}}>Integrations</a><a href="/#pricing" onClick={()=>{setOpen(null);setMobile(false)}}>Pricing</a>
+ <a href="/integrations" onClick={()=>{setOpen(null);setMobile(false)}}>Integrations</a><a href="/pricing" onClick={()=>{setOpen(null);setMobile(false)}}>Pricing</a>
  {menus.slice(2).map(menu=><div className="nav-dropdown" key={menu.title}><button data-menu={menu.title} aria-expanded={open===menu.title} aria-controls={`nav-${menu.title}`} onClick={()=>setOpen(open===menu.title?null:menu.title)}>{menu.title}<svg className="nav-chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5"/></svg></button><div id={`nav-${menu.title}`} className="nav-dropdown-panel" hidden={open!==menu.title}>{menu.links.map(([text,href])=><a key={href} href={href} onClick={()=>{setOpen(null);setMobile(false)}}>{text}</a>)}</div></div>)}
  </nav><div className="nav-actions"><a className="btn btn--primary" href="/#pricing">Start creating <ArrowRight width={16} height={16} /></a></div></div></header>
 }
