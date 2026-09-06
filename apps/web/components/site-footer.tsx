@@ -1,7 +1,7 @@
 const columns = [
-  { h: "Product", links: [["Composer", "#compose"], ["Calendar", "#scheduling"], ["Analytics", "#reliability"]] },
-  { h: "Solutions", links: [["Workspaces", "#audiences"], ["Integrations", "#platforms"], ["Pricing", "#pricing"]] },
-  { h: "Resources", links: [["How it works", "#how-it-works"], ["FAQs", "#faq"], ["Security & access", "#faq"]] },
+  { h: "Product", links: [["Composer", "/#compose"], ["Calendar", "/#scheduling"], ["Analytics", "/#reliability"]] },
+  { h: "Solutions", links: [["Workspaces", "/#audiences"], ["Integrations", "/integrations"], ["Pricing", "/#pricing"]] },
+  { h: "Resources", links: [["How it works", "/#how-it-works"], ["FAQs", "/#faq"], ["Security & access", "/integrations#security"]] },
 ];
 
 export function SiteFooter() {
