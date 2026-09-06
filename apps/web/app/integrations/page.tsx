@@ -52,7 +52,7 @@ export default function IntegrationsPage() {
             <span className="eyebrow">Official connections. One clear workflow.</span>
             <h1>Your channels.<br/><span>One workspace.</span></h1>
             <p>Bring every authorized social destination into one calm publishing system—then adapt, schedule and follow each version from the same place.</p>
-            <a className="btn btn--primary btn--lg" href="#explore">Connect your accounts <ArrowRight width={18} height={18}/></a>
+            <div className="cta-row hero-actions integration-hero-actions"><a className="btn btn--primary btn--lg" href="#explore">Connect your accounts <ArrowRight width={18} height={18}/></a></div>
             <small><Check width={16} height={16}/> Password-free authorization through official platform consent</small>
           </div>
           <div className="integration-orbit" aria-label="Seven social platforms surrounding the Apogix publishing hub">
