@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 
 const phrases = [
   "Publish everywhere.",
-  "Adapt every version.",
+  "Adapt each post.",
   "Schedule smarter.",
-  "Stay in control.",
+  "Stay organized.",
 ];
 
 export function HeroTyping() {
@@ -20,7 +20,7 @@ export function HeroTyping() {
     const phrase = phrases[phraseIndex];
     const complete = visibleText === phrase;
     const empty = visibleText.length === 0;
-    const delay = complete && !deleting ? 1500 : deleting ? 42 : 78;
+    const delay = complete && !deleting ? 2200 : deleting ? 75 : 125;
 
     const timer = window.setTimeout(() => {
       if (complete && !deleting) {
