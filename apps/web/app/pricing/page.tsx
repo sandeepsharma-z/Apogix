@@ -38,7 +38,7 @@ export default function PricingPage(){ return <>
       <div className="pricing-title"><span className="eyebrow">Choose your plan</span><h2>Start focused. Grow when you need to.</h2></div>
       <div className="pricing-columns">{plans.map((plan,index)=><Reveal className={`pricing-column ${plan.featured?"featured":""}`} key={plan.name}>
         <div className="pricing-column-top"><span className="pricing-plan-index">0{index+1}</span>{plan.featured&&<span className="pricing-popular">Most chosen</span>}<h3>{plan.name}</h3><p>{plan.copy}</p></div>
-        <div className="pricing-price"><sup>$</sup><strong>{plan.price}</strong><span>/ month</span></div>
+        <div className="pricing-price"><strong><small>$</small>{plan.price}</strong><span>USD<br/>per month</span></div>
         <ul><li><Check width={17} height={17}/>{plan.accounts}</li><li><Check width={17} height={17}/>{plan.members}</li><li><Check width={17} height={17}/>{plan.limit}</li><li><Check width={17} height={17}/>{plan.storage}</li></ul>
         <a className={`btn ${plan.featured?"btn--primary":"btn--outline"}`} href={plan.name==="Agency"?"https://wa.me/919818639441?text=Hi%20Apogix%2C%20I%20want%20to%20discuss%20the%20Agency%20plan.":"https://wa.me/919818639441?text=Hi%20Apogix%2C%20I%20want%20to%20start%20a%20plan."} target="_blank" rel="noopener noreferrer">{plan.cta}<ArrowRight width={17} height={17}/></a>
       </Reveal>)}</div>
