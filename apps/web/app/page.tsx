@@ -53,7 +53,7 @@ function PublishingProblem() {
         </div>
         <div className="publishing-problem-visual">
           <span className="publishing-problem-number" aria-hidden="true">07</span>
-          <Image className="publishing-problem-image" src="/apogix-publishing-collage.png" alt="Seven separate social publishing editors with repeated cropping, caption edits, upload errors and scheduling issues" width={1536} height={1024} sizes="(max-width: 760px) 100vw, 65vw" />
+          <Image className="publishing-problem-image" src="/apogix-publishing-collage.webp" alt="Seven separate social publishing editors with repeated cropping, caption edits, upload errors and scheduling issues" width={1536} height={1024} sizes="(max-width: 760px) 100vw, 65vw" />
         </div>
       </div>
     </section>
@@ -123,7 +123,7 @@ function TrustRail() {
             <span className="trust-platform" key={kind}><SocialIcon kind={kind} /></span>
           ))}
           <span className="trust-platforms__arrow" aria-hidden="true" />
-          <Image className="trust-logo" src="/apogix-logo.png" alt="Apogix" width={190} height={55} />
+          <Image className="trust-logo" src="/apogix-logo.webp" alt="Apogix" width={190} height={55} />
         </div>
         <p className="trust-note"><svg viewBox="0 0 36 40" aria-hidden="true"><path d="M18 2 3 9v12c0 8 6 13 15 17 9-4 15-9 15-17V9Z" fill="white" stroke="#708caf" strokeWidth="2.3"/><path d="m10 20 5 5 11-12" fill="none" stroke="#00c995" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></svg> Platform availability depends on official API permissions and app approval.</p>
       </div>
@@ -170,7 +170,7 @@ function Compose() {
       <div className="container composer-showcase-layout">
         <div className="composer-artwork">
           <span className="composer-badge composer-badge--platforms"><LinkIcon width={22} height={22}/>5 platforms selected</span>
-          <Image className="composer-product-image" src="/apogix-master-composer.png" alt="Apogix branded master composer with five social destinations, a master caption, coastal media and a live LinkedIn preview" width={1536} height={1024} sizes="(max-width: 900px) 100vw, 62vw"/>
+          <Image className="composer-product-image" src="/apogix-master-composer.webp" alt="Apogix branded master composer with five social destinations, a master caption, coastal media and a live LinkedIn preview" width={1536} height={1024} sizes="(max-width: 900px) 100vw, 62vw"/>
           <span className="composer-badge composer-badge--valid"><Check width={22} height={22}/>All formats valid</span>
         </div>
         <div className="composer-showcase-copy">
@@ -214,7 +214,7 @@ function ConnectedPlatforms() {
           <svg className="platform-network-lines" viewBox="0 0 700 560" aria-hidden="true">
             <path d="M350 280 115 92M350 280 350 58M350 280 585 92M350 280 620 280M350 280 585 468M350 280 350 505M350 280 115 468"/>
           </svg>
-          <div className="platform-hub"><Image src="/apogix-logo.png" alt="Apogix" width={150} height={44}/><small>Publishing hub</small><span><i/>7 channels ready</span></div>
+          <div className="platform-hub"><Image src="/apogix-logo.webp" alt="Apogix" width={150} height={44}/><small>Publishing hub</small><span><i/>7 channels ready</span></div>
           {platforms.map(([kind,name,copy], index) => <div className={`platform-card platform-card--${index + 1}`} key={kind}><div><b>{name}</b><small>{copy}</small></div><SocialIcon kind={kind} /><span><i/>Ready</span></div>)}
         </Reveal>
       </div>
@@ -230,7 +230,7 @@ function ReliabilityAnalytics() {
     <section className="section reliability-analytics" id="reliability" aria-labelledby="reliability-title">
       <div className="container reliability-analytics-layout">
         <div className="reliability-analytics-art">
-          <Image src="/apogix-reliability-analytics.png" alt="Publishing overview with published, failed and retrying posts alongside reach, engagement and post performance charts" width={1536} height={1024} sizes="(max-width: 900px) 100vw, 58vw" />
+          <Image src="/apogix-reliability-analytics.webp" alt="Publishing overview with published, failed and retrying posts alongside reach, engagement and post performance charts" width={1536} height={1024} sizes="(max-width: 900px) 100vw, 58vw" />
         </div>
         <div className="reliability-analytics-copy" id="analytics">
           <span className="eyebrow">Reliability + Analytics</span>
@@ -277,7 +277,7 @@ function HowItWorks() {
         <span className="workflow-start-badge" aria-hidden="true"><Pencil width={25} height={25}/></span>
         <div className="workflow-stage workflow-create">
           <div className="workflow-label"><span className="workflow-number">01</span><h3>Create</h3><p>Write once and bring<br />your media together.</p></div>
-          <div className="workflow-card workflow-composer"><p>New perspectives<br />lead to brighter days. <span className="workflow-caret">&#10022;</span></p><Image src="/apogix-workflow-coast.png" alt="Sunlit coastal cliffs beside a turquoise ocean" width={1536} height={1024} sizes="(max-width: 760px) 70vw, 220px"/><div className="workflow-tools" aria-hidden="true"><Pencil width={18} height={18}/><span>GIF</span><CalendarIcon width={18} height={18}/><span>&#9786;</span></div></div>
+          <div className="workflow-card workflow-composer"><p>New perspectives<br />lead to brighter days. <span className="workflow-caret">&#10022;</span></p><Image src="/apogix-workflow-coast.webp" alt="Sunlit coastal cliffs beside a turquoise ocean" width={1536} height={1024} sizes="(max-width: 760px) 70vw, 220px"/><div className="workflow-tools" aria-hidden="true"><Pencil width={18} height={18}/><span>GIF</span><CalendarIcon width={18} height={18}/><span>&#9786;</span></div></div>
         </div>
         <div className="workflow-stage workflow-adapt">
           <div className="workflow-label"><span className="workflow-number">02</span><h3>Adapt</h3><p>Fine-tune every platform<br />without starting over.</p></div>
@@ -304,7 +304,7 @@ function Workspaces() {
       <div className="container split">
         <Reveal className="split-visual generated-visual-stage team-art-stage">
           <div className="art-glow" aria-hidden="true" />
-          <Image className="generated-art team-art" src="/apogix-team-visual.png" alt="Team collaborating on content approvals in a secure workspace" width={768} height={512} />
+          <Image className="generated-art team-art" src="/apogix-team-visual.webp" alt="Team collaborating on content approvals in a secure workspace" width={768} height={512} />
         </Reveal>
         <div className="split-copy stack">
           <span className="eyebrow">Built for creators, teams and agencies</span>

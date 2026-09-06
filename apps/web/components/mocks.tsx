@@ -88,7 +88,7 @@ export function HeroMock() {
         <circle className="route-node" cx="535" cy="380" r="3" />
       </svg>
       <div className="flow-draft"><i>✎</i><span><b>Draft ready</b><small>1 post</small></span></div>
-      <Image className="flow-composer-image" src="/apogix-hero-composer.png" alt="Apogix new post composer with multi-channel scheduling" width={591} height={665} priority />
+      <Image className="flow-composer-image" src="/apogix-hero-composer.webp" alt="Apogix new post composer with multi-channel scheduling" width={591} height={665} priority />
       <svg className="flow-lines flow-lines--foreground" viewBox="0 0 760 560" preserveAspectRatio="none" aria-hidden="true">
         <defs>
           <marker id="flow-arrow-bottom" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">

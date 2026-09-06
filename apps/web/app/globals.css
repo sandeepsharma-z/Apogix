@@ -2171,7 +2171,7 @@ a {
 .calendar-post { position:relative; display:block; width:100%; padding:8px; background:#fff; border:2px solid transparent; border-radius:13px; box-shadow:0 12px 28px #447fc111; text-align:left; color:var(--ink); cursor:pointer; transition:border-color .3s,box-shadow .3s,transform .3s; }
 .calendar-day.is-active .calendar-post { border-color:#3975ff; box-shadow:0 0 0 3px #dceaff,0 12px 28px #2774ff22; transform:translateY(-5px); }
 .calendar-post:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
-.calendar-photo { position:relative; display:block; width:100%; aspect-ratio:1.1; border-radius:7px; background-image:url('/apogix-calendar-photos.png'); background-size:300% 200%; }
+.calendar-photo { position:relative; display:block; width:100%; aspect-ratio:1.1; border-radius:7px; background-image:url('/apogix-calendar-photos.webp'); background-size:300% 200%; }
 .calendar-photo .social-icon { position:absolute; left:-9px; top:-10px; width:42px; height:42px; background:#fff; border-radius:10px; box-shadow:0 4px 14px #3279bc15; }
 .calendar-photo .social-icon svg { width:32px; height:32px; }
 .calendar-time { position:absolute; bottom:0; right:0; background:#fffffff0; border-radius:5px 0 5px 0; padding:4px 5px; font-size:.65rem; color:#214471; }
