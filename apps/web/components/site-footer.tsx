@@ -1,13 +1,12 @@
 const columns = [
-  { h: "Product", links: [["Composer", "/#compose"], ["Calendar", "/#scheduling"], ["Analytics", "/#reliability"]] },
-  { h: "Solutions", links: [["Workspaces", "/#audiences"], ["Integrations", "/integrations"], ["Pricing", "/pricing"]] },
-  { h: "Resources", links: [["How it works", "/#how-it-works"], ["FAQs", "/#faq"], ["Security & access", "/integrations#security"]] },
+  { h: "Explore", links: [["Home", "/"], ["Features", "/features"], ["Integrations", "/integrations"]] },
+  { h: "Company", links: [["Pricing", "/pricing"], ["About", "/about"], ["Contact", "/contact"]] },
 ];
 
 export function SiteFooter() {
   return <footer className="site-footer">
     <div className="container">
-      <div className="foot-grid">
+      <div className="foot-grid foot-grid-simple">
         <div className="footer-intro">
           <span className="brand"><video className="footer-logo-video" src="/apogix-logo-video.mp4" autoPlay muted loop playsInline preload="metadata" aria-label="Apogix" /></span>
           <p>Write once, adapt per channel, schedule to a date. Apogix publishes everywhere you chose.</p>
