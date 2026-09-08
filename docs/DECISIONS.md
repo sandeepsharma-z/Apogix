@@ -21,3 +21,9 @@ _Record confirmed decisions here with date + who._
 
 - **2026-08-31** — Product name is **Apogix** (was placeholder "SocialFlow"). Still centralized in `packages/config`.
 - **2026-08-31** — Marketing homepage: alternating light/dark editorial bands, cobalt accent. Draft at `marketing/index.html`, later ported into `apps/web`.
+
+## Confirmed implementation direction
+
+- User selected Hostinger MySQL instead of Supabase for persistence. Authentication, workspace isolation and database access must be implemented server-side for MySQL. No paid database services are authorized.
+- `/dashboard` and `/admin` are public demo UI previews only, containing sample data. Before connecting real data, implement authentication and server-enforced roles. Never rely on the preview switcher for authorization.
+- Demo drafts and approvals exist only in React state and reset on reload. No live publishing, billing mutations or customer records are connected.
